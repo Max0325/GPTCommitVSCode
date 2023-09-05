@@ -58,7 +58,7 @@
       "properties": {
         "gptcommit@max.appearance.delimeter": {
           "type": "string",
-          "default": "*",
+          "default": "",
           "description": "Delimeter between commit lines"
         },
         "gptcommit@max.general.generator": {
@@ -83,6 +83,12 @@
           "default": "",
           "description": "Needed for generating AI commit messages"
         },
+        "gptcommit@max.openAI.prompt": {
+          "type": "string",
+          "default": "Please help me craft a commit message based on the 'git diff --staged' output. The commit message should:\n\nUse the present tense.\nBe in English.\nBegin with a short summary, and for more complex changes, provide a detailed description after a blank line.\nAdhere to the Conventional Commits format and include a scope. Avoid any extra headers or preambles.",
+          "description": "Prompt for ChatGPT.",
+          "editPresentation": "multilineText"
+        },        
         "gptcommit@max.openAI.gptVersion": {
           "type": "string",
           "enum": [

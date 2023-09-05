@@ -21,6 +21,7 @@ const configurationSchema = z.object({
   }),
   openAI: z.object({
     apiKey: z.string().optional(),
+    prompt: z.string().optional(),
     gptVersion: z
       .enum([
         "gpt-4",
