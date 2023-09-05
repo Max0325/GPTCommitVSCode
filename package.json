@@ -1,19 +1,19 @@
 {
   "name": "gpt-commit",
-  "displayName": "GPT Commit",
+  "displayName": "GPT Commit@Max",
   "description": "VS Code extension which helps to generate AI commit messages using ChatGPT",
-  "version": "1.0.5",
-  "homepage": "https://github.com/dmytrobaida/GPTCommitVSCode#readme",
-  "bugs": "https://github.com/dmytrobaida/GPTCommitVSCode/issues",
+  "version": "1.0.7",
+  "homepage": "https://github.com/Max0325/GPTCommitVSCode#readme",
+  "bugs": "https://github.com/Max0325/GPTCommitVSCode/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmytrobaida/GPTCommitVSCode"
+    "url": "https://github.com/Max0325/GPTCommitVSCode"
   },
   "license": "MIT",
   "engines": {
     "vscode": "^1.76.0"
   },
-  "publisher": "DmytroBaida",
+  "publisher": "Max",
   "categories": [
     "Other",
     "SCM Providers"
@@ -32,7 +32,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "gptcommit.generateAICommit",
+        "command": "gptcommit@max.generateAICommit",
         "title": "Generate AI commit",
         "icon": {
           "dark": "assets/icons/commit-dark.svg",
@@ -40,14 +40,14 @@
         }
       },
       {
-        "command": "gptcommit.setOpenAIApiKey",
+        "command": "gptcommit@max.setOpenAIApiKey",
         "title": "Set OpenAI API key"
       }
     ],
     "menus": {
       "scm/title": [
         {
-          "command": "gptcommit.generateAICommit",
+          "command": "gptcommit@max.generateAICommit",
           "when": "scmProvider == git",
           "group": "navigation"
         }
@@ -56,12 +56,12 @@
     "configuration": {
       "title": "GPT Commit",
       "properties": {
-        "gptcommit.appearance.delimeter": {
+        "gptcommit@max.appearance.delimeter": {
           "type": "string",
           "default": "*",
           "description": "Delimeter between commit lines"
         },
-        "gptcommit.general.generator": {
+        "gptcommit@max.general.generator": {
           "type": "string",
           "enum": [
             "ChatGPT"
@@ -69,7 +69,7 @@
           "default": "ChatGPT",
           "description": "Generator used to create commit messages"
         },
-        "gptcommit.general.messageApproveMethod": {
+        "gptcommit@max.general.messageApproveMethod": {
           "type": "string",
           "enum": [
             "Quick pick",
@@ -78,12 +78,12 @@
           "default": "Quick pick",
           "description": "Method used to approve generated commit messages"
         },
-        "gptcommit.openAI.apiKey": {
+        "gptcommit@max.openAI.apiKey": {
           "type": "string",
           "default": "",
           "description": "Needed for generating AI commit messages"
         },
-        "gptcommit.openAI.gptVersion": {
+        "gptcommit@max.openAI.gptVersion": {
           "type": "string",
           "enum": [
             "gpt-4",
@@ -98,17 +98,17 @@
           "default": "gpt-3.5-turbo-16k",
           "description": "Version of GPT used by OpenAI"
         },
-        "gptcommit.openAI.customEndpoint": {
+        "gptcommit@max.openAI.customEndpoint": {
           "type": "string",
           "default": "",
           "description": "Custom endpoint URL for OpenAI API"
         },
-        "gptcommit.openAI.temperature": {
+        "gptcommit@max.openAI.temperature": {
           "type": "number",
           "default": 0.2,
           "description": "Controls randomness. Lowering results in less random completions. As the temperature approaches zero, the model will become deterministic and repetitive"
         },
-        "gptcommit.openAI.maxTokens": {
+        "gptcommit@max.openAI.maxTokens": {
           "type": "number",
           "default": 196,
           "description": "The maximum number of tokens to generate. Requests can use up to 2048 tokens shared between prompt and completion"
@@ -122,7 +122,7 @@
     "build": "npm run esbuild-base -- --sourcemap",
     "watch": "npm run esbuild-base -- --sourcemap --watch",
     "lint": "eslint src --ext ts",
-    "package": "vsce package -o packages",
+    "package": "vsce package -o ./packages",
     "package:publish": "vsce publish"
   },
   "devDependencies": {
