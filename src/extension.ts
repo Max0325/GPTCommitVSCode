@@ -5,13 +5,13 @@ import { generateAiCommitCommand, setOpenaiApiKey } from "@commands";
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "gptcommit.generateAICommit",
+      "gptcommit@max.generateAICommit",
       generateAiCommitCommand
     )
   );
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "gptcommit.setOpenAIApiKey",
+      "gptcommit@max.setOpenAIApiKey",
       setOpenaiApiKey
     )
   );

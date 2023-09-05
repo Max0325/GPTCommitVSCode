@@ -19,37 +19,58 @@ import { MsgGenerator } from "./msg-generator";
 const initMessagesPrompt: Array<ChatCompletionRequestMessage> = [
   {
     role: ChatCompletionRequestMessageRoleEnum.System,
-    content: `You are to act as the author of a commit message in git. Your mission is to create clean and comprehensive commit messages in the conventional commit convention. I'll send you an output of 'git diff --staged' command, and you convert it into a commit message. Do not preface the commit with anything, use the present tense. Don't add any descriptions to the commit, only commit message. Use english language to answer.`,
+      // content: `
+      // You are to act as the author of a commit message in git. 
+      // Your mission is to create clean and comprehensive commit messages in the conventional commit convention.
+      // I'll send you an output of 'git diff --staged' command, and you convert it into a commit message. 
+      // Do not preface the commit with anything, use the present tense.
+      // Use the English language to answer.
+      // The message should contain a first line with a short summary and if the commit is non-trivial a longer description after a blank line.
+      // `,
+      content: `
+      Please help me craft a commit message based on the 'git diff --staged' output. The commit message should:
+
+      Use the present tense.
+      Be in English.
+      Begin with a short summary, and for more complex changes, provide a detailed description after a blank line.
+      Adhere to the Conventional Commits format and include a scope. Avoid any extra headers or preambles.
+      `
   },
   {
     role: ChatCompletionRequestMessageRoleEnum.User,
-    content: `diff --git a/src/server.ts b/src/server.ts
+    content: `
+    diff --git a/src/server.ts b/src/server.ts
     index ad4db42..f3b18a9 100644
     --- a/src/server.ts
     +++ b/src/server.ts
     @@ -10,7 +10,7 @@ import {
       initWinstonLogger();
-      
+
       const app = express();
     -const port = 7799;
     +const PORT = 7799;
-      
+
       app.use(express.json());
-      
+
     @@ -34,6 +34,6 @@ app.use((_, res, next) => {
       // ROUTES
       app.use(PROTECTED_ROUTER_URL, protectedRouter);
-      
+
     -app.listen(port, () => {
     -  console.log(\`Server listening on port \${port}\`);
     +app.listen(process.env.PORT || PORT, () => {
     +  console.log(\`Server listening on port \${PORT}\`);
-      });`,
+      });
+    `,
   },
   {
     role: ChatCompletionRequestMessageRoleEnum.Assistant,
-    content: `fix(server.ts): change port variable case from lowercase port to uppercase PORT
-        feat(server.ts): add support for process.env.PORT environment variable`,
+    content: `
+    feat(server): update port variable and listening setup
+
+    - Changed port variable from lowercase to uppercase convention.
+    - Modified server to listen on the environment variable 'PORT' or fallback to the hardcoded 'PORT' value.
+    `,
   },
 ];
 
@@ -100,7 +121,6 @@ export class ChatgptMsgGenerator implements MsgGenerator {
       throw new Error("No commit message were generated. Try again.");
     }
 
-    const alignedCommitMessage = trimNewLines(commitMessage, delimeter);
-    return alignedCommitMessage;
+    return trimNewLines(commitMessage, delimeter);
   }
 }

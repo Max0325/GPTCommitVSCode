@@ -47,11 +47,11 @@ export async function setConfigurationValue(
   key: DeepKey<Configuration>,
   value: any
 ) {
-  const configuration = vscode.workspace.getConfiguration("gptcommit");
+  const configuration = vscode.workspace.getConfiguration("gptcommit@max");
   await configuration.update(key, value, vscode.ConfigurationTarget.Global);
 }
 
 export function getConfiguration() {
-  const configuration = vscode.workspace.getConfiguration("gptcommit");
+  const configuration = vscode.workspace.getConfiguration("gptcommit@max");
   return configurationSchema.parse(configuration);
 }
